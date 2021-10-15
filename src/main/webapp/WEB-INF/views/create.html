@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<h3>Create Music</h3>
+<form th:action="@{create}" th:object="${listMusicForm}" method="post" enctype="multipart/form-data">
+    <table class="table">
+        <tbody>
+        <tr>
+            <td>Ten BH:</td>
+            <td><input placeholder="nhập nameBaiHat" th:field="*{nameBaiHat}"></td>
+            <td>Name Nghe Si:</td>
+            <td><input placeholder="nhập nameNgheSy" th:field="*{nameNgheSy}"></td>
+            <td>The Loai:</td>
+<!--            //cách 1: Nhập thể loại-->
+<!--            <td><input placeholder="nhập theLoai" th:field="*{theLoai}"></td>-->
+<!--            //Cách 2: Chọn thể loại theo list-->
+            <td>
+                <select th:field="*{theLoai}">
+                    <option th:value="NhacNhe">Nhạc nhẹ</option>
+                    <option th:value="NhacVang"> Nhạc Vàng</option>
+                </select>
+            </td>
+            <td>File Music:</td>
+            <td>
+                <input type="file" th:field="*{fileMusic}">
+<!--                <input type="file" name="uppMusic">-->
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-success">Create</button>
+</form>
+</body>
+</html>

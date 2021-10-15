@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h3>MUSIC APPLICATION</h3>
+    <td><a href="/create">create</a></td>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Ten bai hat</th>
+            <th>Ten nghe sy</th>
+            <th>The Loai</th>
+            <th>fileMusic</th>
+            <th>Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="music,loop : ${list}">
+            <td th:text="${music.nameBaiHat}"></td>
+            <td th:text="${music.nameNgheSy}"></td>
+            <td th:text="${music.theLoai}"></td>
+<!--            <td th:text="${music.fileMusic}"></td>-->
+            <td>
+                <audio id="track" controls loop>
+                    <source th:src="@{'/image/'+${music.fileMusic}}" type="audio/mpeg">
+                    <p>Your browser does not support the audio element</p>
+                </audio>
+<!--                <img width="200" height="100" th:src="@{'/image/' + ${music.fileMusic}}" alt="">-->
+            </td>
+            <td ><a th:href="@{/edit/{index}(index=${loop.index})}" class="btn btn-warning">Edit</a></td>
+            <td ><a th:href="@{/delete/{index}(index=${loop.index})}" class="btn btn-danger">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div style="color: red" th:if="${message}">
+    <span th:text="${message}"></span>
+</div>
+</body>
+</html>
